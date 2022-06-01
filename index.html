@@ -16,22 +16,20 @@
   <script>
     let width = 600;
     let height = 400;
+    let barHeight = 10;
 
     const svg = d3.select("#result")
       .append("svg")
       .attr('width', width)
       .attr('height', height);
 
-    const container = d3.select('#result')
+    const container = svg
       .append('text')
-      .text('Federal Reserve Economic Data')
-
-    
+      .text('Federal Reserve Economic Data')    
       
 
     d3.json('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json')
       .then(json =>{
-        
         const data = json.data
         
         const gdp = data.map(item => item[1])
@@ -45,11 +43,12 @@
           .data(gdp)
           .enter()
           .append("g")
-          .attr("transform", (d,i) => "translate(0," + i * 10 +")"
+          .attr("transform", (d,i) => `translate(0,${i * barHeight })`)
+          .attr("color","blue")
 
         g.append("rect")
           .attr("width",(d)=> scale(d))
-          .attr("height", 10)
+          .attr("height", barHeight -1)
       })
   </script>
 </body>
