@@ -44,11 +44,11 @@
           .enter()
           .append("g")
           .attr("transform", (d,i) => `translate(0,${i * barHeight })`)
-          .attr("color","blue")
-
-        g.append("rect")
+          
+          g.append("rect")
           .attr("width",(d)=> scale(d))
-          .attr("height", barHeight -1)
+          .attr("height", barHeight -2)
+          .attr("fill","blue")
 
         g.append("text")
           .text(d => d)
