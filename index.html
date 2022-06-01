@@ -49,6 +49,11 @@
         g.append("rect")
           .attr("width",(d)=> scale(d))
           .attr("height", barHeight -1)
+
+        g.append("text")
+          .text(d => d)
+          .attr("x", d=>scale(d)+10)
+          .attr("font-size","10px")
       })
   </script>
 </body>
