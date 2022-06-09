@@ -26,9 +26,9 @@ d3.json('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/mas
     const data = json.data
     console.log(data)
     
-    const xScale = d3.scaleTime()
-      .domain([d3.min(data, d=>d[0]), d3.max(data, d=>d[0])])
-      .range([0, width]);
+    const xScale = d3.scaleLinear()
+      .domain([0, d3.max(data, d=>d[1])])
+      .range([0, height]);
 
     const xAxis = d3.axisBottom().scale(xScale);
 
