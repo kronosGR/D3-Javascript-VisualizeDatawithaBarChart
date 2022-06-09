@@ -7,55 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Visualize Data with a Bar Chart</title>
   <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+     .bar {
+            fill: steelblue;
+        }
+  </style>
 
 </head>
 
 <body>
   <h1 id="title">Federal Reserve Economic Data</h1>
   <div id="result"></div>
-  <script>
-    let width = 600;
-    let height = 400;
-    let barHeight = 10;
-
-    const svg = d3.select("#result")
-      .append("svg")
-      .attr('width', width)
-      .attr('height', height);
-
-    const container = svg
-      .append('text')
-      .text('Federal Reserve Economic Data')    
-      
-
-    d3.json('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json')
-      .then(json =>{
-        const data = json.data
-        
-        const gdp = data.map(item => item[1])
-        console.log(gdp);
-
-        const scale=d3.scaleLinear()
-          .domain([d3.min(gdp), d3.max(gdp)])
-          .range([d3.min(gdp), d3.max(gdp)])
-
-        const g =  svg.selectAll("g")
-          .data(gdp)
-          .enter()
-          .append("g")
-          .attr("transform", (d,i) => `translate(0,${i * barHeight })`)
-          
-          g.append("rect")
-          .attr("width",(d)=> scale(d))
-          .attr("height", barHeight -2)
-          .attr("fill","blue")
-
-        g.append("text")
-          .text(d => d)
-          .attr("x", d=>scale(d)+10)
-          .attr("font-size","10px")
-      })
-  </script>
+  <script src="index.js"/>
 </body>
 
 </html>
