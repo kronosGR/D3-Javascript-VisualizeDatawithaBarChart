@@ -26,24 +26,24 @@ d3.json('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/mas
     const data = json.data
     console.log(data)
     
-    const xScale = d3.scaleLinear()
-      .domain([0, d3.max(data, d=>d[1])])
-      .range([0, height]);
+    const xScale = d3.scaleTime()
+      .domain([d3.min(data, d=>d[0]), d3.max(data, d=>d[0])])
+      .range([0, width]);
 
     const xAxis = d3.axisBottom().scale(xScale);
 
     const yScale= d3.scaleLinear()
-      .domain([0, d3.max(data, d=>d[1])])
-      .range([height, 0])
+      .domain([d3.min(data, d=>d[1]), d3.max(data, d=>d[1])])
+      .range([0, height])
     const yAxis = d3.axisLeft(yScale);
 
     svg.append('g')
       .call(xAxis)
-      .attr('transform', `translate(60, ${height+10})`);
+      .attr('transform', `translate(60,${height})`);
     
     svg.append('g')
       .call(yAxis)
-      .attr('transform', translate(60,0))
+      .attr('transform', `translate(60, 0)`)
 
   // svg.append("g")
   //   .call(d3.axisLeft(y))
@@ -52,8 +52,8 @@ d3.json('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/mas
     .data(data)
     .enter()
     .append("rect")
-      .attr("x", function(d,i) { return d[1]})
-      .attr("y", function(d) { return height-d[1]})
+      .attr("x", function(d,i) { return 60 +i*10})
+      .attr("y", function(d) { return height})
       .attr("width", 10)
       .attr("height", function(d) { return xScale(d[1]); })
       .attr("fill", "#69b3a2")
