@@ -33,8 +33,8 @@ d3.json('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/mas
     const xAxis = d3.axisBottom().scale(xScale);
 
     const yScale= d3.scaleLinear()
-      .domain([d3.min(data, d=>d[1]), d3.max(data, d=>d[1])])
-      .range([0, height])
+      .domain([0, d3.max(data, d=>d[1])])
+      .range([ height,0])
     const yAxis = d3.axisLeft(yScale);
 
     svg.append('g')
