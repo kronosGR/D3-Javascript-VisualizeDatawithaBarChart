@@ -17,18 +17,17 @@ svg
   .attr("y", 50)
   .text("Federal Reserve Economic Data");
 
-// const g = svg.append("g")
-//   .attr("fill","blue")
-
 d3.json(
   "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json"
 ).then((json) => {
   const data = json.data;
-  console.log(data);
 
   let xScale = d3
     .scaleTime()
-    .domain([d3.min(data, (d) => new Date(d[0])), d3.max(data, (d) => new Date(d[0]))])
+    .domain([
+      d3.min(data, (d) => new Date(d[0])),
+      d3.max(data, (d) => new Date(d[0])),
+    ])
     .range([0, width]);
 
   const xAxis = d3.axisBottom(xScale);
@@ -43,13 +42,29 @@ d3.json(
 
   svg.append("g").call(yAxis).attr("transform", `translate(60, 0)`);
 
-  svg.selectAll("rect")
-  .data(data)
-  .enter()
-  .append("rect")
-    .attr("x", function(d,i) { return 61 +xScale(new Date(d[0]))})
-    .attr("y", function(d) { return height -d[1]})
+  const items = data.map((item) => item[1]);
+  const years = data.map(item => new Date(item[0]));
+  const itemsMax = d3.max(items);
+
+  // console.log(itemsMax);
+
+  const linearScale = d3.scaleLinear().domain([0, itemsMax]).range([0, height]);
+
+  const scaledItems = items.map((item) => linearScale(item));
+  svg
+    .selectAll("rect")
+    .data(scaledItems)
+    .enter()
+    .append("rect")
+    .attr("x", function (d, i) {
+      return 61 + xScale(years[i]);
+    })
+    .attr("y", function (d) {
+      return height - d;
+    })
     .attr("width", 10)
-    .attr("height", function(d) { return d[1]; })
-    .attr("fill", "#69b3a2")
+    .attr("height", function (d) {
+      return d;
+    })
+    .attr("fill", "#69b3a2");
 });
