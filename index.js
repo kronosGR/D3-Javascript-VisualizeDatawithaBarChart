@@ -43,13 +43,13 @@ d3.json(
 
   svg.append("g").call(yAxis).attr("transform", `translate(60, 0)`);
 
-  // svg.selectAll("rect")
-  // .data(data)
-  // .enter()
-  // .append("rect")
-  //   .attr("x", function(d,i) { return 60 +i*10})
-  //   .attr("y", function(d) { return height})
-  //   .attr("width", 10)
-  //   .attr("height", function(d) { return xScale(d[1]); })
-  //   .attr("fill", "#69b3a2")
+  svg.selectAll("rect")
+  .data(data)
+  .enter()
+  .append("rect")
+    .attr("x", function(d,i) { return 61 +xScale(new Date(d[0]))})
+    .attr("y", function(d) { return height -d[1]})
+    .attr("width", 10)
+    .attr("height", function(d) { return d[1]; })
+    .attr("fill", "#69b3a2")
 });
