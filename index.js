@@ -45,9 +45,11 @@ d3.json(
     .range([height, 0]);
   const yAxis = d3.axisLeft(yScale);
 
-  svg.append("g").call(yAxis)
+  svg
+    .append("g")
+    .call(yAxis)
     .attr("transform", `translate(60, 0)`)
-    .attr("id","y-axis");
+    .attr("id", "y-axis");
 
   const items = data.map((item) => item[1]);
   const years = data.map((item) => new Date(item[0]));
@@ -73,5 +75,14 @@ d3.json(
     .attr("height", function (d) {
       return d;
     })
-    .attr("fill", "#69b3a2");
+    .attr("class", "bar")
+    .attr("data-date", (d, i) => {
+      return data[i][0];
+    })
+    .attr("data-gdp",  (d, i) =>{
+      return data[i][1];
+    })
+    .on("mouseover", (e,d)=>{
+      
+    })
 });
