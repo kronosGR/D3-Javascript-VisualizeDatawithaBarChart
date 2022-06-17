@@ -15,7 +15,8 @@ svg
   .attr("transform", "translate(100,0)")
   .attr("x", 50)
   .attr("y", 50)
-  .text("Federal Reserve Economic Data");
+  .text("Federal Reserve Economic Data")
+  .attr("id", "title");
 
 d3.json(
   "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json"
@@ -32,7 +33,11 @@ d3.json(
 
   const xAxis = d3.axisBottom(xScale);
 
-  svg.append("g").call(xAxis).attr("transform", `translate(60,${height})`);
+  svg
+    .append("g")
+    .call(xAxis)
+    .attr("transform", `translate(60,${height})`)
+    .attr("id", "x-axis");
 
   const yScale = d3
     .scaleLinear()
@@ -40,10 +45,12 @@ d3.json(
     .range([height, 0]);
   const yAxis = d3.axisLeft(yScale);
 
-  svg.append("g").call(yAxis).attr("transform", `translate(60, 0)`);
+  svg.append("g").call(yAxis)
+    .attr("transform", `translate(60, 0)`)
+    .attr("id","y-axis");
 
   const items = data.map((item) => item[1]);
-  const years = data.map(item => new Date(item[0]));
+  const years = data.map((item) => new Date(item[0]));
   const itemsMax = d3.max(items);
 
   // console.log(itemsMax);
