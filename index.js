@@ -10,6 +10,8 @@ var svg = d3
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+const popup = d3.select("popup").append("div").style("opacity", 0);
+
 svg
   .append("text")
   .attr("transform", "translate(100,0)")
@@ -79,10 +81,22 @@ d3.json(
     .attr("data-date", (d, i) => {
       return data[i][0];
     })
-    .attr("data-gdp",  (d, i) =>{
+    .attr("data-gdp", (d, i) => {
       return data[i][1];
     })
-    .on("mouseover", (e,d)=>{
-      
-    })
+    .attr("data-idx", (d, i) => i)
+    .on("mouseover", (e, d) => {
+      const idx = e.target.getAttribute("data-idx");
+      // console.log(e.target.getAttribute('data-idx'))
+      console.log(idx);
+
+      popup
+        .attr("id", "tooltip")
+        .style("height", d + "px")
+        .style("width", 10)
+        .style("opacity", 1)
+        .style("top", height - 150 + "px")
+        .style("left", idx * 10 + 30 +"px")
+        .html(idx);
+    });
 });
