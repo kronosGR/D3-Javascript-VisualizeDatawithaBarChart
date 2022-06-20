@@ -1,22 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Visualize Data with a Bar Chart</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <style>
-      .bar {
-        fill: steelblue;
-      }
-    </style>
-  </head>
 
-  <body>
-    <h1 id="title">Federal Reserve Economic Data</h1>
-    <div id="result"></div>
-    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js" ></script>
-    <script src="index.js" ></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visualize Data with a Bar Chart</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    .bar {
+      fill: steelblue;
+    }
+
+    .tooltip {
+      position: absolute;
+      text-align: center;
+      width: 100px;
+      height: 28px;
+      padding: 2px;
+      font: 12px sans-serif;
+      background: lightsteelblue;
+      border: 0px;
+      border-radius: 8px;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 id="title">Federal Reserve Economic Data</h1>
+  <div id="result"></div>
+  <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+  <script src="index.js"></script>
+</body>
+
 </html>
